@@ -10,7 +10,9 @@ Data visualization runs through all three parts.
 
 ## Data
 
-Data is collected on a VPS and rsynced back into `data/`. Nothing in `data/` is committed.
+Data is collected on a VPS and published to the public Hugging Face dataset **[hikarinko/cumtd](https://huggingface.co/datasets/hikarinko/cumtd)**. That dataset is the source of truth. `data/` is a local copy of it and is git-ignored.
+
+Fetch or update the local copy with **`./sync.sh`** (extra args go to `hf download`, e.g. `./sync.sh --dry-run`). It downloads only new or changed snapshots and GTFS zips, deliberately skips the dataset's `mtd.sqlite` (+ `-wal`, `-shm`), and prints the newest snapshot path. Run it before analysis so you're not working on stale data. If you edit it, give each glob its own `--include` flag; listing both after a single flag fails.
 
 ```
 data/
@@ -20,6 +22,7 @@ data/
 ```
 
 - Always read the **newest snapshot**. Ignore `mtd.sqlite`.
+- For reproducible results, record which snapshot file (and the dataset commit, if relevant) an analysis or simulation calibration used.
 - Open snapshots read-only: `sqlite3.connect("file:<path>?mode=ro&immutable=1", uri=True)`. Never write to them. Put derived data in separate files.
 - `gtfs_versions` in each snapshot records the sha256 and path of the static GTFS zip that was active when collection started.
 - All timestamps are **unix seconds, UTC**. Service runs on **America/Chicago** local time, and `start_date` (YYYYMMDD) is the local service date. Convert times before grouping by day or hour.
