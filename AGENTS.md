@@ -51,6 +51,7 @@ Verified on the 2026-11-11 snapshot:
 
 ## Environment
 
+- Python package `bunching` (src layout: `src/bunching/`, build backend `uv_build`), Python 3.14 (pinned in `.python-version`).
 - The project is managed with **uv**. Dependencies go in `pyproject.toml` via `uv add <pkg>` (`uv add --dev <pkg>` for dev-only tools). Commit `uv.lock`. Run everything with `uv run …`, e.g. `uv run python -m …` or `uv run pytest`. Don't use bare `pip`, `uv pip install`, or a manually activated venv.
 - Any web server or viz preview must run on **port 8080**, bound to **0.0.0.0**. No other port is reachable from the host.
 - Never `git commit` or `git push`. Leave changes for the user to commit.
