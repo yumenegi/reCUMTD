@@ -1,7 +1,7 @@
 [project]
-name = "bunching"
+name = "sim"
 version = "0.1.0"
-description = "Exploring bus bunching on Champaign-Urbana MTD: measurement, simulation, and holding strategies"
+description = "Bus bunching simulator for Champaign-Urbana MTD, based on the literature in docs/literature"
 readme = "README.md"
 authors = [
     { name = "negi", email = "negi@yumenegi.com" }
@@ -10,8 +10,11 @@ requires-python = ">=3.14"
 dependencies = []
 
 [project.scripts]
-bunching = "bunching:main"
+sim = "sim:main"
 
 [build-system]
 requires = ["uv_build>=0.13.5,<0.14.0"]
 build-backend = "uv_build"
+
+[tool.uv.build-backend]
+module-name = ["sim", "analysis"]
