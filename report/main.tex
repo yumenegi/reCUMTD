@@ -62,7 +62,7 @@
 This study examines bus bunching on the Champaign-Urbana Mass Transit District (MTD) network and compares methods for controlling it.
 The proposed approach uses MTD's public APIs to gather real-world GPS location data, which is then used to calibrate a simulation for headway distribution based on Bellei and Gkoumas~\cite{bellei2010}.
 The simulation provides a common setting for testing and evaluating different control methods;
-in particular, this study examines the efficacy of headway-, schedule-, prediction-, and learning-based methods~\cite{berrebi2018holding}\cite{rodriguez2023}.
+in particular, this study examines the efficacy of schedule-, headway-, prediction-, and learning-based methods~\cite{berrebi2018holding}\cite{rodriguez2023}.
 
 \subsection{Simulating buses}
 
@@ -86,9 +86,22 @@ The recorded MTD vehicle location data provides travel-time estimates and dispat
 These quantities are used to calibrate the paper's triangular travel-time distribution and minimum separation between successive buses.
 Due to lack of recorded data, however, passenger arrival rates, alighting probabilities, and their corresponding coefficients $a_1$ and $a_2$ are assumed.
 
-\subsection{Comparing control methods}
+\subsection{Control Methods}
+
+Four control methods are compared to the baseline simulation:
+
+Schedule-based holding methods delay a bus until its scheduled departure.
+Headway-based holding methods delay a bus when the time between it and its predecessor's departure is shorter than a target headway.
+Prediction-based holding methods delay a bus based on estimates for subsequent buses arrival times.
+The implementations of these three methods follow Berrebi et al.~\cite{berrebi2018holding}.
+
+% NOTE: i don't know if we plan on implementing stop-skipping?
+% I think it's probably best not to for consistency.
+The learning-based approach is based on the reinforcement learning framework of Rodriguez et al.~\cite{rodriguez2023}\ to holding-only control, where agents use headway and passenger information to choose when and how long to delay a bus.
 
 \subsection{Evaluating results}
+
+% TODO: discuss experimental methodology (e.g. what are we measuring, how many trials, etc.) and discuss what visualizations we'll create & how we'll analyze them.
 
 \section{Results}
 
